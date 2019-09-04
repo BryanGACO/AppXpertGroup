@@ -1,0 +1,87 @@
+<br />
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Cube-summation
+  </div>
+  <div class="panel-body">
+    <div class='row'>
+      <div class='col-md-2'>Número de casos de prueba:</div>
+      <div class='col-md-4'>
+        <input type='text' numericOnly maxlength="2" min="1" max="50" [(ngModel)]='CasosDePrueba' (blur)="setTestCases()" />
+      </div>
+    </div>
+    <br />
+    <div class="panel panel-default" *ngFor='let cubo of cubos'>
+      <div class="panel-heading">
+        Cubo - {{ cubo.Id }}
+      </div>
+
+      <div class="panel-body">
+        <div class='row'>
+          <div class='col-md-2'>Dimensión cubo:</div>
+          <div class='col-md-4'>
+            <input type='text' numericOnly maxlength="3" min="1" max="100" [(ngModel)]='cubo._dimension' />
+          </div>
+        </div>
+        <br />
+        <div class='row'>
+          <div class='col-md-2'>Número de operaciones:</div>
+          <div class='col-md-4'>
+            <input type='text' numericOnly maxlength="4" [(ngModel)]='cubo._operaciones' />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-9">
+            <div class='row' *ngFor='let query of cubo.Queries'>
+              <br />
+              <div class='col-md-2'>
+                <select [(ngModel)]="query.Tipo">
+                  <option value="Q">QUERY</option>
+                  <option value="U">UPDATE</option>
+                </select>
+              </div>
+              <div class='col-md-4'>
+                C1
+                <select [(ngModel)]="query.CoordenadaInicial.X">
+                  <option *ngFor='let pto of cubo.ArrayPtos' [ngValue]="pto">{{pto}}</option>
+                </select>
+                <select [(ngModel)]="query.CoordenadaInicial.Y">
+                  <option *ngFor='let pto of cubo.ArrayPtos' [ngValue]="pto">{{pto}}</option>
+                </select>
+                <select [(ngModel)]="query.CoordenadaInicial.Z">
+                  <option *ngFor='let pto of cubo.ArrayPtos' [ngValue]="pto">{{pto}}</option>
+                </select>
+                <input type="text" numericOnly *ngIf="query.Tipo == 'U'" [(ngModel)]="query.CoordenadaInicial.Value" style="width:40px" />
+              </div>
+              <div class='col-md-3' *ngIf="query.Tipo == 'Q'">
+                C2
+                <select [(ngModel)]="query.CoordenadaFinal.X">
+                  <option *ngFor='let pto of cubo.ArrayPtos' [ngValue]="pto">{{pto}}</option>
+                </select>
+                <select [(ngModel)]="query.CoordenadaFinal.Y">
+                  <option *ngFor='let pto of cubo.ArrayPtos' [ngValue]="pto">{{pto}}</option>
+                </select>
+                <select [(ngModel)]="query.CoordenadaFinal.Z">
+                  <option *ngFor='let pto of cubo.ArrayPtos' [ngValue]="pto">{{pto}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3" *ngIf="cubo.ArrayRptas.length > 0">
+            <label style="color:red" >Respuestas</label>
+            <div *ngFor='let rpta of cubo.ArrayRptas'>{{rpta}}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-footer">
+        <div class="row">
+          <div class="col-md-2">
+            <input type="button" (click)="resolveCube()" value="Resolver" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

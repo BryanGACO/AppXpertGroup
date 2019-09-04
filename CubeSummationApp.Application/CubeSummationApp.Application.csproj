@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CubeSummationApp.Application.Contracts\CubeSummationApp.Application.Contracts.csproj" />
+    <ProjectReference Include="..\CubeSummationApp.DataAccess.Contracts\CubeSummationApp.DataAccess.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>
